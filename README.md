@@ -1,27 +1,59 @@
-# Greet
-You need atleast python 3.6 and redis server to run greet.
+# Greet Service
 
-```
-#setup dependencies
-pip install flask redis
+## Description
 
-# start redis server
-redis-server
+This repository contains the Greet service and its Helm chart for deployment on a Kubernetes cluster.
 
-# run app
-python greet.py
-```
+## Repository Structure
 
-Once application starts running visit http://localhost:8080 to view the greeting. 
+greet-service
+├── greet
+│ ├── Dockerfile
+│ ├── app.py
+│ ├── requirements.txt
+├── chart
+│ └── greet-service
+│ ├── Chart.yaml
+│ ├── values.yaml
+│ └── templates
+│ ├── deployment.yaml
+│ ├── service.yaml
+│ └── ingress.yaml
+├── .gitignore
+├── README.md
 
-```
-curl http://localhost:8080
-```
 
-To change name in greeting, send a POST request
 
-```
-curl -X POST -H "Content-Type: application/json" -d "{\"name\": \"Ben\"}" http://localhost:8080
-```
+- `greet/`: Contains the Greet service source code and Dockerfile.
+- `chart/greet-service/`: Contains the Helm chart for deploying the Greet service.
+
+## Prerequisites
+
+- Docker
+- Kubernetes cluster
+- Helm
+- AWS CLI configured with necessary permissions
+
+## Setup Instructions
+
+### 1. Build and Push Docker Image
+
+First, navigate to the `greet` directory, build the Docker image, and push it to a Docker registry.
+
+```sh
+cd greet
+docker build -t <registry>/greet-service:latest .
+docker push <registry>/greet-service:latest
+
+2. Update Helm Chart Values in override-values.yaml
+Update the image.repository value in chart/override-values.yaml with your registry.
+
+3. Deploy with Helm
+Ensure you have Helm installed and configured. Then, deploy the Helm chart in your existing Kubernetes namespace.
+
+helm install greet-service ./chart/greet-service --namespace <existing-namespace>
+
+4. Access the Service
+The Greet service will be accessible at https://greeting-api.acme.co if the DNS and TLS are configured correctly.
 
 
