@@ -12,7 +12,6 @@ greet-service
 │ ├── app.py
 │ ├── requirements.txt
 ├── chart
-│ └── greet-service
 │ ├── Chart.yaml
 │ ├── values.yaml
 │ └── templates
@@ -51,7 +50,7 @@ Update the image.repository value in chart/override-values.yaml with your regist
 3. Deploy with Helm
 Ensure you have Helm installed and configured. Then, deploy the Helm chart in your existing Kubernetes namespace.
 
-helm install greet-service ./chart/greet-service --namespace <existing-namespace>
+helm install -f chart/override-values.yaml greet-service ./chart --namespace <existing-namespace>
 
 4. Access the Service
 The Greet service will be accessible at https://greeting-api.acme.co if the DNS and TLS are configured correctly.
