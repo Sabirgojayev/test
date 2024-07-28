@@ -1,5 +1,6 @@
-import json
 import redis
+import os
+import json
 from flask import Flask, request
 from typing import Text, Optional, Dict, Any
 
@@ -9,7 +10,7 @@ app = Flask(__name__)
 def get_current_user() -> Optional[Dict[Text, Any]]:
     """Extract current user details from storage."""
 
-    red = redis.StrictRedis(host="localhost", port=6379, db=1)
+    red = redis.StrictRedis(host=os.environ.get('REDIS_HOST', 'localhost'), port=os.environ.get('REDIS_PORT', '6379', db=1)
     encoded_user = red.get("user")
     if encoded_user:
         return json.loads(encoded_user)
@@ -20,7 +21,7 @@ def get_current_user() -> Optional[Dict[Text, Any]]:
 def store_user(user: Dict[Text, Any]) -> None:
     """Save user details to our storage."""
 
-    red = redis.StrictRedis(host="localhost", port=6379, db=1)
+    red = redis.StrictRedis(host=os.environ.get('REDIS_HOST', 'localhost'), port=os.environ.get('REDIS_PORT', '6379'), db=1)
     red.set("user", json.dumps(user))
 
 
