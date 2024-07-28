@@ -105,6 +105,8 @@ affinity: {}
 redis:
   replicaCount: 1
 
+  name: "redis"
+
   labels:
     app: redis
 
