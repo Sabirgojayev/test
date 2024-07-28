@@ -10,7 +10,7 @@ app = Flask(__name__)
 def get_current_user() -> Optional[Dict[Text, Any]]:
     """Extract current user details from storage."""
 
-    red = redis.StrictRedis(host=os.environ.get('REDIS_HOST', 'localhost'), port=os.environ.get('REDIS_PORT', '6379', db=1)
+    red = redis.StrictRedis(host=os.environ.get('REDIS_HOST', 'localhost'), port=os.environ.get('REDIS_PORT', '6379'), db=1)
     encoded_user = red.get("user")
     if encoded_user:
         return json.loads(encoded_user)
@@ -45,4 +45,4 @@ def save_name():
     return "I'll try to remember your name, {}!".format(user.get("name"))
 
 
-app.run(port=8080)
+app.run(host='0.0.0.0', port=8080)
