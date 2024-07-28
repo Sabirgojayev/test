@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir flask redis
 # Expose app port
 EXPOSE 8080
 
-ENV REDIS_HOST
-ENV REDIS_PORT
+ENV REDIS_HOST='localhost'
+ENV REDIS_PORT=6379
 
 CMD ["python", "app.py"]
