@@ -1,7 +1,3 @@
-ARG USERNAME=flask
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-
 # Use an official Python runtime as a parent image
 FROM python:3.11-slim-bookworm
 

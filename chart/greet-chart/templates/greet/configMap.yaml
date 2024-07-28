@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.redis.configMap }}
 data:
-  redis_host: {{ .Values.redis.name }}
-  redis_port: {{ .Values.redis.service.port }}
+  redis_host: "redis"
+  redis_port: "6379"

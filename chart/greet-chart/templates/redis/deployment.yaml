@@ -43,10 +43,10 @@ spec:
             - name: redis
               containerPort: {{ .Values.redis.service.port }}
               protocol: TCP
-          livenessProbe:
-            {{- toYaml .Values.redis.livenessProbe | nindent 12 }}
-          readinessProbe:
-            {{- toYaml .Values.redis.readinessProbe | nindent 12 }}
+          # livenessProbe:
+          #   {{- toYaml .Values.redis.livenessProbe | nindent 12 }}
+          # readinessProbe:
+          #   {{- toYaml .Values.redis.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.redis.resources | nindent 12 }}
           {{- with .Values.redis.volumeMounts }}
